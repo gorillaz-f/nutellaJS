@@ -43,15 +43,15 @@
 		// from right to left
 		if (self.direction === 'left') {
 			startTransform =  Eip.utils.makeTranslate3DString(self.width - offsetX, -offsetY, 0);
-		} 
+		}
 		// from left to right
 		else if (self.direction === 'right') {
 			startTransform =  Eip.utils.makeTranslate3DString(-self.width - offsetX, -offsetY, 0);
-		} 
+		}
 		// from bottom to top
 		else if (self.direction === 'up') {
 			startTransform =  Eip.utils.makeTranslate3DString( - offsetX, self.height -offsetY, 0);
-		} 
+		}
 		// from top to bottom
 		else if (self.direction === 'down') {
 			startTransform =  Eip.utils.makeTranslate3DString( - offsetX, -self.height -offsetY, 0);
@@ -67,14 +67,14 @@
 		self.cur.css({
 			'z-index': '0'
 		}).show();
-		
+
 		self.onBegin && self.onBegin();
 
 		// 执行动画
-		var toTransform = Eip.utils.makeTranslate3DString(-offsetX, -offsetY, 0);
+		var endTransform = Eip.utils.makeTranslate3DString(-offsetX, -offsetY, 0);
 		self.next.animate(
-			//{'-webkit-transform': 'translate3d(' + (-offsetX)+'px, ' +  (-offsetY)+'px, 0px)'},
-			{'-webkit-transform': toTransform},
+			//{'-webkit-transform': 'Translate3D(' + (-offsetX)+'px, ' +  (-offsetY)+'px, 0px)'},
+			{'-webkit-transform': endTransform},
 			self.duration,
 			"ease-out",
 			function() {
@@ -140,5 +140,71 @@
 				self.onEnd && self.onEnd();
 			}
 		)
+	}
+});
+
+
+// 滑动式的切换过场动画
+// 新旧两个对象同时滑动, 一个退出，一个进入
+;Eip.Transitions.Slide = Eip.Transitions.Base.extend({
+	initialize: function(options) {
+		var self = this;
+		self.parentClass = Eip.Transitions.Base;
+		self.parentClass.prototype.initialize.apply(self, arguments);
+	},
+
+	begin: function() {
+		var self = this;
+
+		var tempContainer = self.cur.parent();
+		var offsetX = Number(tempContainer.attr("offsetx"));
+		var offsetY = Number(tempContainer.attr("offsety"));
+
+		$("." + self.className, self.viewport).hide()
+
+		var startTransform, endTransform;
+
+		if (self.direction === 'left') {
+			startTransform	= Eip.utils.makeTranslate3DString( self.width-offsetX , 0-offsetY, 0);
+			endTransform	= Eip.utils.makeTranslate3DString( 0-self.width+offsetX , 0+offsetY , 0);
+		}
+		else if (self.direction === 'right') {
+			startTransform	= Eip.utils.makeTranslate3DString( 0-self.width-offsetX , 0-offsetY , 0);
+			endTransform	= Eip.utils.makeTranslate3DString( self.width+offsetX , 0+offsetY , 0);
+		}
+		else if (self.direction === 'up') {
+			startTransform	= Eip.utils.makeTranslate3DString( 0-offsetX , self.height-offsetY , 0);
+			endTransform	= Eip.utils.makeTranslate3DString( 0+offsetX , 0-self.height+offsetX , 0);
+		}
+		else if (self.direction === 'down') {
+			startTransform	= Eip.utils.makeTranslate3DString( 0-offsetX , 0-self.height-offsetY , 0);
+			endTransform	= Eip.utils.makeTranslate3DString( 0+offsetX , self.height+offsetY , 0);
+		}
+
+		self.cur.css({
+			'z-index': '0'
+		}).show();
+
+		self.next.css({
+			'z-index': '1',
+			'-webkit-transform': startTransform
+		}).show();
+
+		setTimeout(function() {
+			self.onBegin && self.onBegin();
+
+			tempContainer.animate(
+				{ '-webkit-transform' : endTransform },
+				self.duration,
+				"ease-out",
+				function() {
+					var offset = tempContainer.position();
+					tempContainer.attr('offsetx', offset.left);
+					tempContainer.attr('offsety', offset.top);
+					//alert(offset.left + "/// " + offset.top);
+					self.onEnd && self.onEnd();
+				}
+			);
+		}, 0);
 	}
 });

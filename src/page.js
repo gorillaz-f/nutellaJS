@@ -47,6 +47,29 @@ Eip.Pages.RedPageView = Eip.Pages.PageView.extend({
 			'height':'100%',
 			'width':'100%'
 		});
+
+		var prevBtn =
+		$("<div class='prevBtn' \
+				style='float: left;\
+						display: block;\
+						margin-top: 100px;\
+						width: 50px;\
+						height: 30px;'>\
+		</div>");
+		prevBtn.text('PREV');
+
+		var nextBtn =
+		$("<div class='nextBtn' \
+				style='float: right;\
+						display: block;\
+						margin-top: 100px;\
+						width: 50px;\
+						height: 30px;'>\
+		</div>");
+		nextBtn.text('NEXT');
+
+		this.$el.append(prevBtn);
+		this.$el.append(nextBtn);
 	}
 });
 
@@ -58,10 +81,62 @@ Eip.Pages.BluePageView = Eip.Pages.PageView.extend({
 			'height':'100%',
 			'width':'100%'
 		});
+
+		var prevBtn =
+		$("<div class='prevBtn' \
+				style='float: left;\
+						display: block;\
+						margin-top: 100px;\
+						width: 50px;\
+						height: 30px;'>\
+		</div>");
+		prevBtn.text('PREV');
+
+		var nextBtn =
+		$("<div class='nextBtn' \
+				style='float: right;\
+						display: block;\
+						margin-top: 100px;\
+						width: 50px;\
+						height: 30px;'>\
+		</div>");
+		nextBtn.text('NEXT');
+
+		this.$el.append(prevBtn);
+		this.$el.append(nextBtn);
 	}
 });
 
+Eip.Pages.GreenPageView = Eip.Pages.PageView.extend({
+	init: function(){
+		this.$el.css({
+			'background-color':'green',
+			'display':'block',
+			'height':'100%',
+			'width':'100%'
+		});
 
+		var prevBtn =
+		$("<div class='prevBtn' \
+				style='float: left;\
+						display: block;\
+						margin-top: 100px;\
+						width: 50px;\
+						height: 30px;'>\
+		</div>");
+		prevBtn.text('PREV');
 
+		var nextBtn =
+		$("<div class='nextBtn' \
+				style='float: right;\
+						display: block;\
+						margin-top: 100px;\
+						width: 50px;\
+						height: 30px;'>\
+		</div>");
+		nextBtn.text('NEXT');
 
-
+		this.$el.append(prevBtn);
+		this.$el.append(nextBtn);
+	}
+});

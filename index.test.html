@@ -23,24 +23,33 @@
 	<body>
 		<div id="bodyInner"></div>
 		<script>
-			Eip.sid = "eipm2-alpha-2.2.0";
 			Eip.isPad = false;
-			Eip.packVer = "2.2.1";
-			Eip.isDebugging = true;
 
 			$(document).ready(function () {
 				Eip.pageContext = new PhonePageContext({el: $('#bodyInner').get(0)});
 				var rp = Eip.pageContext.createPage('RedPageView');
 				var bp = Eip.pageContext.createPage('BluePageView');
+				var gp = Eip.pageContext.createPage('GreenPageView');
 				rp.init();
 				bp.init();
+				gp.init();
+
 				Eip.pageContext.addAndShowPage(rp);
 
 				setTimeout(function(){
-					Eip.pageContext.addAndShowPage(bp);
+					Eip.pageContext.addAndShowPage(bp,{
+						transition:'Cover',
+						transitionDuration:1000,
+					});
 				},2000)
+
+				setTimeout(function(){
+					Eip.pageContext.addAndShowPage(gp,{
+						transition:'Slide',
+						transitionDuration:1000,
+					});
+				},4000)
 			});
 		</script>
 	</body>
 </html>
-

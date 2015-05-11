@@ -8,8 +8,7 @@
 	outline: none;
 }
 
-textarea
-{
+textarea {
     -webkit-user-select: auto !important;
 }
 

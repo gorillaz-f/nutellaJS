@@ -1,7 +1,7 @@
 /*
  * 掌控 页（Page）的上下文（Context）管理
  * 如页的增减，切换等
- * 
+ *
  */
 
 // 最基本的PageContext类
@@ -74,15 +74,12 @@ var PageContext = Backbone.View.extend({
 	addAndShowPage: function(pageView) {
 		throw "[addAndShowPage] function should be overrided";
 	},
-
 	hideAndRemovePage: function(pageView) {
 		throw "[hideAndRemovePage] function should be overrided";
 	},
-
 	jumpToPageView: function(pageView) {
 		throw "[jumpToPageView] function should be overrided";
 	},
-
 	goHome: function() {
 		throw "[goHome] function should be overrided";
 	},
@@ -98,7 +95,7 @@ var PageContext = Backbone.View.extend({
 	getPageById: function(pid) {
 		var self = this;
 		return _.find(
-			self.pageList, 
+			self.pageList,
 			function(pv){
 				return pv.pageId === pid;
 			}
@@ -173,7 +170,7 @@ var PhonePageContext = PageContext.extend({
 			{
 				transition:'Cover',
 				transitionDirection: 'left'
-			}, 
+			},
 			options||{}
 		);
 
@@ -212,7 +209,7 @@ var PhonePageContext = PageContext.extend({
 				direction: 	options.transitionDirection,
 				onBegin: function() {
 					//动画开始的时候，没有额外的工作，直接调用pageView的hook
-					pageView.onTransitionBegin(); 
+					pageView.onTransitionBegin();
 				},
 				onEnd: function() {
 
@@ -341,4 +338,3 @@ var PhonePageContext = PageContext.extend({
 	}
 
 });
-
