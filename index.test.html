@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+
+		<script src="lib/zepto.min.js"></script>
+        <script src="lib/underscore-min.js"></script>
+		<script src="lib/backbone-min.js"></script>
+		<script src="lib/iscroll.js"></script>
+		<script src="lib/gestureUtil.js"></script>
+		<script src="lib/require.js"></script>
+		<!--  -->
+		<script src="src/init.js" charset="utf-8"></script>
+		<script src="src/context.js" charset="utf-8"></script>
+		<script src="src/page.js" charset="utf-8"></script>
+		<script src="src/transition.js" charset="utf-8"></script>
+		<script src="src/utils.js" charset="utf-8"></script>
+
+		<link href="src/core.css" rel="stylesheet" media="screen">
+	</head>
+
+	<body>
+		<div id="bodyInner"></div>
+		<script>
+			Eip.sid = "eipm2-alpha-2.2.0";
+			Eip.isPad = false;
+			Eip.packVer = "2.2.1";
+			Eip.isDebugging = true;
+
+			$(document).ready(function () {
+				Eip.pageContext = new PhonePageContext({el: $('#bodyInner').get(0)});
+				var rp = Eip.pageContext.createPage('RedPageView');
+				var bp = Eip.pageContext.createPage('BluePageView');
+				rp.init();
+				bp.init();
+				Eip.pageContext.addAndShowPage(rp);
+
+				setTimeout(function(){
+					Eip.pageContext.addAndShowPage(bp);
+				},2000)
+			});
+		</script>
+	</body>
+</html>
+
