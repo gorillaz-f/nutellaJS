@@ -23,32 +23,81 @@
 	<body>
 		<div id="bodyInner"></div>
 		<script>
-			Eip.isPad = false;
+			Eip.Pages.ColorDemoPageView = Eip.Pages.PageView.extend({
+				events: {
+					'tap div.prevBtn' : 'doPrev',
+					'tap div.nextBtn' : 'doNext',
+				},
+				init: function(){
+					this.$el.css({
+						'background-color':this.options.color||'red',
+						'display':'block',
+						'height':'100%',
+						'width':'100%'
+					});
+
+					var prevBtn =
+					$("<div class='prevBtn' \
+							style='float: left;\
+									display: block;\
+									margin-top: 100px;\
+									width: 50px;\
+									height: 30px;'>\
+					</div>");
+					prevBtn.text('PREV');
+
+					var nextBtn =
+					$("<div class='nextBtn' \
+							style='float: right;\
+									display: block;\
+									margin-top: 100px;\
+									width: 50px;\
+									height: 30px;'>\
+					</div>");
+					nextBtn.text('NEXT');
+
+					this.$el.append(prevBtn);
+					this.$el.append(nextBtn);
+				},
+
+				doPrev: function() {
+					console.log(this.context.prevPage, this) ;
+				},
+
+				doNext: function() {
+					var nextColorMap = {
+						'red':'blue',
+						'blue':'green',
+						'green':'red',
+					};
+					var transitionArr = ['Slide','Cover'];
+					var directionArr  = ['left','right','up','down'];
+
+					var nextColor = nextColorMap[this.options.color||'red'];
+					var nextPage  = Eip.pageContext.createPage('ColorDemoPageView',{color:nextColor});
+
+					var t = Math.floor(Math.random() * 2);
+					var d = Math.floor(Math.random() * 4);
+					var nextTransition = transitionArr[t];
+					var nextDirection  = directionArr[d];
+					console.log('transit with',nextTransition,'to',nextDirection);
+
+					nextPage.init();
+					Eip.pageContext.addAndShowPage(nextPage,{
+						transition: nextTransition,
+						transitionDirection: nextDirection,
+						transitionDuration: 1000,
+					});
+
+				},
+			});
 
 			$(document).ready(function () {
 				Eip.pageContext = new PhonePageContext({el: $('#bodyInner').get(0)});
-				var rp = Eip.pageContext.createPage('RedPageView');
-				var bp = Eip.pageContext.createPage('BluePageView');
-				var gp = Eip.pageContext.createPage('GreenPageView');
+				var rp = Eip.pageContext.createPage('ColorDemoPageView',{color:'red'});
 				rp.init();
-				bp.init();
-				gp.init();
-
 				Eip.pageContext.addAndShowPage(rp);
 
-				setTimeout(function(){
-					Eip.pageContext.addAndShowPage(bp,{
-						transition:'Cover',
-						transitionDuration:1000,
-					});
-				},2000)
-
-				setTimeout(function(){
-					Eip.pageContext.addAndShowPage(gp,{
-						transition:'Slide',
-						transitionDuration:1000,
-					});
-				},4000)
 			});
 		</script>
 	</body>
