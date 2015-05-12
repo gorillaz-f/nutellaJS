@@ -61,7 +61,13 @@
 				},
 
 				doPrev: function() {
-					console.log(this.context.prevPage, this) ;
+					console.log(this.context.prevPageMap[this.pageId], this);
+					if (this.context.prevPageMap[this.pageId]) {
+						Eip.pageContext.hideAndRemovePage(this);
+					}
+					else {
+						console.log("there's no prev page");
+					}
 				},
 
 				doNext: function() {

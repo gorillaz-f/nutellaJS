@@ -127,7 +127,7 @@ var PageContext = Backbone.View.extend({
 var PhonePageContext = PageContext.extend({
 
 	curPage: null,		//当前正在显示的页
-	prevPage: null, 	//当前页的上一页
+	prevPageMap: null, 	//用于记录每一页的上一页
 	pageContainer: null,	//页的展示容器
 	pageInfoMap: null,		//用作记录每个页面的配置参数信息
 
@@ -153,6 +153,7 @@ var PhonePageContext = PageContext.extend({
 		self.pageContainer.appendTo(self.el);
 
 		self.pageInfoMap = {};
+		self.prevPageMap = {};
 
 		// 监听系统返回键
 		self.handleOnBackButton();
@@ -192,7 +193,7 @@ var PhonePageContext = PageContext.extend({
 			pageView.onTransitionEnd();
 
 			self.curPage = pageView;
-			self.prevPage= null;
+			self.prevPageMap[pageView.pageId] = null;
 		}
 		// 当前已经有展示的页面，则需要通过进场动画切换页面
 		else {
@@ -212,8 +213,8 @@ var PhonePageContext = PageContext.extend({
 					pageView.onTransitionBegin();
 				},
 				onEnd: function() {
-
-					self.prevPage = self.curPage;
+					// 新添加的页变成当前页，原来的当前页则成为新加页的上一页
+					self.prevPageMap[pageView.pageId] = self.curPage.pageId;
 					self.curPage  = pageView;
 
 					var pre = self.curPage;
@@ -261,9 +262,9 @@ var PhonePageContext = PageContext.extend({
 		}
 
 		//var pre = self.getPageById(self.previousPageMap[pageView.pageId]);
-		var pre = self.prevPage;
+		var pre = self.getPageById(self.prevPageMap[pageView.pageId]);
 		var transition = self.pageInfoMap[pageView.pageId].transition;
-		if (transition == 'Cover') transition = 'Uncover';
+		if (transition === 'Cover') transition = 'Uncover';
 
 		var direction = self.pageInfoMap[pageView.pageId].transitionDirection;
 
@@ -276,7 +277,7 @@ var PhonePageContext = PageContext.extend({
 		//目的是还原页面的尺寸为设备尺寸，防止误算
 		self.pageContainer.find("input").blur();
 
-		(new Eip.transitions[transition]({
+		(new Eip.Transitions[transition]({
 			cur:  pageView.el,
 			next:  pre.el,
 			width:  self.width,
@@ -300,7 +301,7 @@ var PhonePageContext = PageContext.extend({
 
 	beforeRemovePage: function(pageView) {
 		var self = this;
-		self.previousPageMap[pageView.pageId] = null;
+		self.prevPageMap[pageView.pageId] = null;
 		self.pageInfoMap[pageView.pageId] = null;
 	},
 
