@@ -174,7 +174,7 @@
 		}
 		else if (self.direction === 'up') {
 			startTransform	= Eip.utils.makeTranslate3DString( 0-offsetX , self.height-offsetY , 0);
-			endTransform	= Eip.utils.makeTranslate3DString( 0+offsetX , 0-self.height+offsetX , 0);
+			endTransform	= Eip.utils.makeTranslate3DString( 0+offsetX , 0-self.height+offsetY , 0);
 		}
 		else if (self.direction === 'down') {
 			startTransform	= Eip.utils.makeTranslate3DString( 0-offsetX , 0-self.height-offsetY , 0);
