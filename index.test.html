@@ -36,6 +36,16 @@
 						'width':'100%'
 					});
 
+					var labelDiv =
+					$("<div class='lableDiv' \
+							style='display:block;\
+									margin-top: 100px;\
+									margin-left: 70px;\
+									width: auto;\
+									height: 30px;' \
+					/>");
+					labelDiv.text(this.options.label||'no label');
+
 					var prevBtn =
 					$("<div class='prevBtn' \
 							style='float: left;\
@@ -56,12 +66,12 @@
 					</div>");
 					nextBtn.text('NEXT');
 
+					this.$el.append(labelDiv);
 					this.$el.append(prevBtn);
 					this.$el.append(nextBtn);
 				},
 
 				doPrev: function() {
-					console.log(this.context.prevPageMap[this.pageId], this);
 					if (this.context.prevPageMap[this.pageId]) {
 						Eip.pageContext.hideAndRemovePage(this);
 					}
@@ -80,14 +90,16 @@
 					var directionArr  = ['left','right','up','down'];
 
 					var nextColor = nextColorMap[this.options.color||'red'];
-					var nextPage  = Eip.pageContext.createPage('ColorDemoPageView',{color:nextColor});
 
 					var t = Math.floor(Math.random() * 2);
 					var d = Math.floor(Math.random() * 4);
 					var nextTransition = transitionArr[t];
 					var nextDirection  = directionArr[d];
-					console.log('transit with',nextTransition,'to',nextDirection);
 
+					var nextPage  = Eip.pageContext.createPage('ColorDemoPageView',{
+						color : nextColor,
+						label : nextTransition+' to '+nextDirection,
+					});
 					nextPage.init();
 					Eip.pageContext.addAndShowPage(nextPage,{
 						transition: nextTransition,
