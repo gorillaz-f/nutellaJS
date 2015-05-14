@@ -7,6 +7,7 @@ module.exports = function(grunt) {
         all: ['src/**/*.js'],
         options: {
             '-W030': true,
+            '-W043': true,
             reporter: require('jshint-stylish')
         }
     },
