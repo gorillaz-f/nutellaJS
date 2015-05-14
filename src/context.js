@@ -51,7 +51,6 @@ var PageContext = Backbone.View.extend({
 
 		if (!pageView) {
 			throw "there's no such page view ["+pageName+"]";
-			return null;
 		}
 
 		return new pageView($.extend({}, options || {}, {context: self} ));
@@ -110,7 +109,6 @@ var PageContext = Backbone.View.extend({
 		}
 		else {
 			throw "homepage is not defined yet";
-			return null;
 		}
 		//return  _.find(self.pageList, function(p) {return p.pageType === 'homepage'});
 	},

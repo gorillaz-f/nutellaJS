@@ -1,6 +1,6 @@
 
 //过场动画的基类
-;Eip.Transitions.Base = Backbone.Model.extend({
+Eip.Transitions.Base = Backbone.Model.extend({
 	initialize: function(options) {
 		var self = this;
 
@@ -23,7 +23,7 @@
 
 // 覆盖式的切换过场动画
 // 新对象滑动进入,并将旧对象覆盖
-;Eip.Transitions.Cover = Eip.Transitions.Base.extend({
+Eip.Transitions.Cover = Eip.Transitions.Base.extend({
 	initialize: function(options) {
 		var self = this;
 		self.parentClass = Eip.Transitions.Base;
@@ -83,14 +83,14 @@
 				//最后执行回调hook
 				self.onEnd && self.onEnd();
 			}
-		)
+		);
 	}
 });
 
 
 // 反覆盖式的切换过场动画
 // 当前对象滑动退出，并将旧对象显露
-;Eip.Transitions.Uncover = Eip.Transitions.Base.extend({
+Eip.Transitions.Uncover = Eip.Transitions.Base.extend({
 	initialize: function(options) {
 		var self = this;
 		self.parentClass = Eip.Transitions.Base;
@@ -104,7 +104,7 @@
 		var offsetX = Number(tempContainer.attr("offsetx"));
 		var offsetY = Number(tempContainer.attr("offsety"));
 
-		$("." + self.className, self.viewport).hide()
+		$("." + self.className, self.viewport).hide();
 
 		self.next.css({
 			'z-index': '0',
@@ -139,14 +139,14 @@
 				self.cur.hide();
 				self.onEnd && self.onEnd();
 			}
-		)
+		);
 	}
 });
 
 
 // 滑动式的切换过场动画
 // 新旧两个对象同时滑动, 一个退出，一个进入
-;Eip.Transitions.Slide = Eip.Transitions.Base.extend({
+Eip.Transitions.Slide = Eip.Transitions.Base.extend({
 	initialize: function(options) {
 		var self = this;
 		self.parentClass = Eip.Transitions.Base;
@@ -160,7 +160,7 @@
 		var offsetX = Number(tempContainer.attr("offsetx"));
 		var offsetY = Number(tempContainer.attr("offsety"));
 
-		$("." + self.className, self.viewport).hide()
+		$("." + self.className, self.viewport).hide();
 
 		var startTransform, endTransform;
 
