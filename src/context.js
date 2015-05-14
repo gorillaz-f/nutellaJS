@@ -7,14 +7,16 @@
 // 最基本的PageContext类
 nut.Contexts.PageContext = Backbone.View.extend({
 
-	pageList : null,	//页面列表，后面进来的在尾巴
-	homePage : null,	//首页对象的引用
+	pagesMap : null,	//容器中的页面
+	homePage : null,	//首页的引用
 	height: 0,			//容器的高度
 	width: 0,		    //容器的宽度
 
 	initialize: function() {
 		var self = this;
-		self.pageList = [];
+
+		self.pagesMap = {}; // {pageId:pageView}
+
 		//是为避免虚拟键盘弹出的时候，会使html和body的尺寸变化
 		//所以在初始化的时候先获取初始尺寸
 		//self.$el.css({'height': nut.windowInnerHeight});
@@ -58,40 +60,29 @@ nut.Contexts.PageContext = Backbone.View.extend({
 
 
 	// 在上下文容器中添加一个页实例，添加后受到管理
-	// @transition
-	// @transitionDirection
-	// @transitionDuration
-	addPage: function(pageView, options){
+	addPage: function(pageView){
 		var self = this;
 		pageView.$el.addClass("page");
 		pageView.$el.attr("pageid", pageView.pageId); //将pageId写到dom对象上面
 
-		// 默认参数，切换动画使用slide方式，向左切换
-		options = $.extend(
-			{
-				transition:'Cover',
-				transitionDirection: 'left'
-			},
-			options||{}
-		);
-
-		self.pageInfoMap[pageView.pageId] = options;
-
-		self.pageList.push(pageView);
-
+		self.pagesMap[pageView.pageId] = pageView;
 	},
+
 	// 从上下文容器中删除一个页实例，脱离管理后，还会销毁对象
 	removePage: function(pageView) {
+		if (!pageView) {
+			return;
+		}
+
 		var self = this;
+		var id = pageView.pageId.toString();
 		// 先调用hook，做一些必要的预处理
 		self.beforeRemovePage(pageView);
 		// 清除dom
 		pageView.$el.remove();
-		// 从pageList中除去
-		var id = pageView.pageId;
-		self.pageList = _.filter(self.pageList, function(pv) { return pv.pageId != id; } );
+		// 从容器中除去
+		delete self.pagesMap[id];
 	},
-
 
 	// 这些接口定义，应该由子类实现
 	addAndShowPage: function(pageView) {
@@ -100,7 +91,7 @@ nut.Contexts.PageContext = Backbone.View.extend({
 	hideAndRemovePage: function(pageView) {
 		throw "[hideAndRemovePage] function should be overrided";
 	},
-	jumpToPageView: function(pageView) {
+	goToPageView: function(pageView) {
 		throw "[jumpToPageView] function should be overrided";
 	},
 	goHome: function() {
@@ -108,24 +99,11 @@ nut.Contexts.PageContext = Backbone.View.extend({
 	},
 
 
-	// 获取最迟加入的页
-	getLastPage: function() {
-		var self = this;
-		return self.pageList[self.pageList.length - 1];
-	},
-
 	// 通过ID获取页
 	getPageById: function(pid) {
-		var self = this;
-		return _.find(
-			self.pageList,
-			function(pv){
-				return pv.pageId === pid;
-			}
-		);
+		return this.pagesMap[pid];
 	},
-
-	// 获取首页引用（不一定是第一页）
+	// 获取首页（不一定是第一页）
 	getHomePage: function() {
 		var self = this;
 		if (self.homePage) {
@@ -134,12 +112,10 @@ nut.Contexts.PageContext = Backbone.View.extend({
 		else {
 			throw "homepage is not defined yet";
 		}
-		//return  _.find(self.pageList, function(p) {return p.pageType === 'homepage'});
 	},
 	// 设置首页
 	setHomePage: function(pageView) {
-		var self = this;
-		self.pageview = pageView;
+		this.homePage = pageView;
 	}
 
 });
@@ -187,8 +163,18 @@ nut.Contexts.PhonePageContext = nut.Contexts.PageContext.extend({
 
 		var self = this;
 
-		self.addPage(pageView, options);
+		self.addPage(pageView);
 
+		// 默认参数，切换动画使用slide方式，向左切换
+		options = $.extend(
+			{
+				transition:'Cover',
+				transitionDirection: 'left'
+			},
+			options||{}
+		);
+
+		self.pageInfoMap[pageView.pageId] = options;
 		//强制所有页面的input元素消失
 		//目的是还原页面的尺寸为设备尺寸，防止误算
 		self.pageContainer.find("input").blur();
@@ -204,6 +190,9 @@ nut.Contexts.PhonePageContext = nut.Contexts.PageContext.extend({
 
 			self.curPage = pageView;
 			self.prevPageMap[pageView.pageId] = null;
+
+			// 默认第一页是HomePage
+			self.setHomePage(pageView);
 		}
 		// 当前已经有展示的页面，则需要通过进场动画切换页面
 		else {
@@ -319,24 +308,14 @@ nut.Contexts.PhonePageContext = nut.Contexts.PageContext.extend({
 	goHome: function() {
 		var self = this;
 		var home = self.getHomePage();
-		self.jumpToPageView(home);
+		self.goToPageView(home);
 	},
 
 	// 响应系统返回键被触发的处理
 	handleOnBackButton: function(){
 		var self = this;
 		self.on('backbutton', function() {
-			if (self.getLastPage() && self.getLastPage().isLoginPage) {
-				/*
-				nut.utils.confirm({
-					"msg" : '确定要退出吗？',
-					"confirm" : function() {
-						navigator.app.exitApp();
-					}
-				});
-*/
-			}
-			else if (self.loadingView.isLoading) {
+			if (self.loadingView.isLoading) {
 				return ;
 			}
 			else if(self.curPage.doBack){
