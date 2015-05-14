@@ -39,6 +39,10 @@ WHY
 
 **A：**顾名思义，虚拟页面只是虚拟出来的在dom中的一个div，之所以称为页面，是因为大部分情况下，其大小都跟屏幕一样，或者大致一样，而这些页面会根据需要被切换展示不同的内容，就像我们传统的网页跳转一样。
 
+**Q: **为什么叫做nutella？
+
+**A：**nutella其实是一个榛果可可酱的牌子，作者很喜欢它的味道，所有就取它的名字了……
+
 --------------------
 
 HOW
@@ -53,7 +57,7 @@ var pageContext = new PhonePageContext({
 });
 
 // 创建一个页面实例，类型是DemoPageView
-var page = pageContext.createPage('DemoPageView');
+var page = pageContext.getPageInst('DemoPageView');
 // 执行必要的初始化
 page.init();
 
