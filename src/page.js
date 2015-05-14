@@ -1,6 +1,6 @@
 //所有page的基类
 //如果一个属性只在pad下面有意义，命名时遵循 xxxxIfPad 的约定
-Eip.Pages.PageView = Backbone.View.extend({
+nut.Pages.PageView = Backbone.View.extend({
 	tagName: 	'div',
 	pageId: 	'',		//page的Id
 	pageType: 	'',		//页面类型, homepage表示这个是homepage
@@ -14,7 +14,7 @@ Eip.Pages.PageView = Backbone.View.extend({
 
 		self.context = options.context; //容器上下文
 		//每个page都有一个全局唯一的pageId
-		//self.pageId = "page" + Eip.utils.getAutoIncreamentId();
+		//self.pageId = "page" + nut.utils.getAutoIncreamentId();
 		self.pageId = "page"+(Date.now().toString());
 		self.$el.addClass('page');
 	},

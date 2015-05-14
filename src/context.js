@@ -5,7 +5,7 @@
  */
 
 // 最基本的PageContext类
-var PageContext = Backbone.View.extend({
+nut.Contexts.PageContext = Backbone.View.extend({
 
 	pageList : null,	//页面列表，后面进来的在尾巴
 	homePage : null,	//首页对象的引用
@@ -17,16 +17,16 @@ var PageContext = Backbone.View.extend({
 		self.pageList = [];
 		//是为避免虚拟键盘弹出的时候，会使html和body的尺寸变化
 		//所以在初始化的时候先获取初始尺寸
-		//self.$el.css({'height': Eip.windowInnerHeight});
+		//self.$el.css({'height': nut.windowInnerHeight});
 		self.height = self.$el.height();
 		self.width = self.$el.width();
 	},
 
-	// 创建一个新的页对象
-	// 创建后，页对象受到Context管理，但并不代表马上展现
-	// @pageName 调用者通过指定页名称来创建页对象，页的命名有一定规则，以PageView为后缀
+	// 从nut已登记的Pages中，获取(创建)一个指定名称(类名)的Page实例
+	// 创建后的Page实例未受到Context管理，并且不马上展现
+	// @pageName 调用者通过指定页名称来创建页实例，页的命名有一定规则，以PageView为后缀
 	// @options  页对象创建时候需要用到的参数，动态参数集，每个页对象都由自己定义的需要的参数
-	createPage: function(pageName, options) {
+	getPageInst: function(pageName, options) {
 		var self = this;
 		var pageView = null;
 		// 若调用者没有按规则指定page全名，则由createPage方法做拼接后缀src
@@ -35,18 +35,18 @@ var PageContext = Backbone.View.extend({
 			var phonePageName = pageName + 'PageView';
 
 			// 对于平板设备
-			if (false || Eip.utils.isPad) {
+			if (false || nut.utils.isPad) {
 				// 优先使用pad的view，如果不存在则使用phone的view
-				pageView = Eip.Pages[padPageName] || Eip.Pages[phonePageName];
+				pageView = nut.Pages[padPageName] || nut.Pages[phonePageName];
 			}
 			// 对于手机设备
 			else {
-				pageView = Eip.Pages[phonePageName];
+				pageView = nut.Pages[phonePageName];
 			}
 		}
 		// 否则使用调者提供的page全名来构建pageview
 		else {
-			pageView = Eip.Pages[pageName];
+			pageView = nut.Pages[pageName];
 		}
 
 		if (!pageView) {
@@ -56,7 +56,31 @@ var PageContext = Backbone.View.extend({
 		return new pageView($.extend({}, options || {}, {context: self} ));
 	},
 
-	// 从上下文容器中删除一个页对象
+
+	// 在上下文容器中添加一个页实例，添加后受到管理
+	// @transition
+	// @transitionDirection
+	// @transitionDuration
+	addPage: function(pageView, options){
+		var self = this;
+		pageView.$el.addClass("page");
+		pageView.$el.attr("pageid", pageView.pageId); //将pageId写到dom对象上面
+
+		// 默认参数，切换动画使用slide方式，向左切换
+		options = $.extend(
+			{
+				transition:'Cover',
+				transitionDirection: 'left'
+			},
+			options||{}
+		);
+
+		self.pageInfoMap[pageView.pageId] = options;
+
+		self.pageList.push(pageView);
+
+	},
+	// 从上下文容器中删除一个页实例，脱离管理后，还会销毁对象
 	removePage: function(pageView) {
 		var self = this;
 		// 先调用hook，做一些必要的预处理
@@ -122,7 +146,7 @@ var PageContext = Backbone.View.extend({
 
 
 // 应用于手机设备的PageContext
-var PhonePageContext = PageContext.extend({
+nut.Contexts.PhonePageContext = nut.Contexts.PageContext.extend({
 
 	curPage: null,		//当前正在显示的页
 	prevPageMap: null, 	//用于记录每一页的上一页
@@ -132,7 +156,7 @@ var PhonePageContext = PageContext.extend({
 	initialize: function(options) {
 		var self = this;
 		// 先调用父类的构建函数
-		PageContext.prototype.initialize.call(self, options);
+		nut.Contexts.PageContext.prototype.initialize.call(self, options);
 
 		self.pageContainer = $("\
 			<div \
@@ -160,22 +184,10 @@ var PhonePageContext = PageContext.extend({
 	// @overrided
 	// 页面被添加并需要展示的时候
 	addAndShowPage: function(pageView, options) {
+
 		var self = this;
-		pageView.$el.addClass("page");
-		pageView.$el.attr("pageid", pageView.pageId); //将pageId写到dom对象上面
 
-		// 默认参数，切换动画使用slide方式，向左切换
-		options = $.extend(
-			{
-				transition:'Cover',
-				transitionDirection: 'left'
-			},
-			options||{}
-		);
-
-		self.pageInfoMap[pageView.pageId] = options;
-
-		self.pageList.push(pageView);
+		self.addPage(pageView, options);
 
 		//强制所有页面的input元素消失
 		//目的是还原页面的尺寸为设备尺寸，防止误算
@@ -200,7 +212,7 @@ var PhonePageContext = PageContext.extend({
 			pageView.onAppendedToContext();
 
 			// 再创建一个切换动画实例，并执行
-			(new Eip.Transitions[options.transition]({
+			(new nut.Transitions[options.transition]({
 				cur: 	self.curPage.el,
 				next: 	pageView.el,
 				width: 	self.width,
@@ -222,12 +234,12 @@ var PhonePageContext = PageContext.extend({
 					//为其添加一个dragger，用作处理拖动手势
 					if (pageView.isDraggable) {
 						var transitionType = options.transition === 'Cover' ? 'CoverDragger' : 'SlideDragger' ;
-						pageView.pageDragger = new Eip.transitions[transitionType]({
+						pageView.pageDragger = new nut.transitions[transitionType]({
 							cur: cur.el,
 							pre: pre.el,
 							width: self.width,
 							height: self.height,
-							duration: Eip.constants.pageTransitionDurationMS,
+							duration: nut.constants.pageTransitionDurationMS,
 							onLeave: function() {
 								self.curPage = pre;
 								self.removePage(cur);
@@ -243,7 +255,7 @@ var PhonePageContext = PageContext.extend({
 
 					pageView.onTransitionEnd();
 				},
-				duration: options.transitionDuration||Eip.constants.pageTransitionDurationMS
+				duration: options.transitionDuration||nut.constants.pageTransitionDurationMS
 			}))
 			.begin();
 
@@ -275,7 +287,7 @@ var PhonePageContext = PageContext.extend({
 		//目的是还原页面的尺寸为设备尺寸，防止误算
 		self.pageContainer.find("input").blur();
 
-		(new Eip.Transitions[transition]({
+		(new nut.Transitions[transition]({
 			cur:  pageView.el,
 			next:  pre.el,
 			width:  self.width,
@@ -292,7 +304,7 @@ var PhonePageContext = PageContext.extend({
 				self.trigger("goBackToPage", self.curPage);
 
 			},
-			duration: Eip.constants.pageTransitionDurationMS
+			duration: nut.constants.pageTransitionDurationMS
 		}))
 		.begin();
 	},
@@ -316,7 +328,7 @@ var PhonePageContext = PageContext.extend({
 		self.on('backbutton', function() {
 			if (self.getLastPage() && self.getLastPage().isLoginPage) {
 				/*
-				Eip.utils.confirm({
+				nut.utils.confirm({
 					"msg" : '确定要退出吗？',
 					"confirm" : function() {
 						navigator.app.exitApp();

@@ -4,26 +4,21 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 
-		<script src="lib/zepto.min.js"></script>
-        <script src="lib/underscore-min.js"></script>
-		<script src="lib/backbone-min.js"></script>
-		<script src="lib/iscroll.js"></script>
-		<script src="lib/gestureUtil.js"></script>
-		<script src="lib/require.js"></script>
+		<script src="../../lib/zepto.min.js"></script>
+        <script src="../../lib/underscore-min.js"></script>
+		<script src="../../lib/backbone-min.js"></script>
+		<script src="../../lib/iscroll.js"></script>
+		<script src="../../lib/gestureUtil.js"></script>
+		<script src="../../lib/require.js"></script>
 		<!--  -->
-		<script src="src/init.js" charset="utf-8"></script>
-		<script src="src/context.js" charset="utf-8"></script>
-		<script src="src/page.js" charset="utf-8"></script>
-		<script src="src/transition.js" charset="utf-8"></script>
-		<script src="src/utils.js" charset="utf-8"></script>
-
-		<link href="src/core.css" rel="stylesheet" media="screen">
+		<script src="../../dest/nut-all.js" charset="utf-8"></script>
+		<link  href="../../dest/nut-all.css" rel="stylesheet" media="screen">
 	</head>
 
 	<body>
 		<div id="bodyInner"></div>
 		<script>
-			Eip.Pages.ColorDemoPageView = Eip.Pages.PageView.extend({
+			nut.Pages.ColorDemoPageView = nut.Pages.PageView.extend({
 				events: {
 					'tap div.prevBtn' : 'doPrev',
 					'tap div.nextBtn' : 'doNext',
@@ -73,7 +68,7 @@
 
 				doPrev: function() {
 					if (this.context.prevPageMap[this.pageId]) {
-						Eip.pageContext.hideAndRemovePage(this);
+						nut.pageContext.hideAndRemovePage(this);
 					}
 					else {
 						console.log("there's no prev page");
@@ -96,12 +91,12 @@
 					var nextTransition = transitionArr[t];
 					var nextDirection  = directionArr[d];
 
-					var nextPage  = Eip.pageContext.createPage('ColorDemoPageView',{
+					var nextPage  = nut.pageContext.getPageInst('ColorDemoPageView',{
 						color : nextColor,
 						label : nextTransition+' to '+nextDirection,
 					});
 					nextPage.init();
-					Eip.pageContext.addAndShowPage(nextPage,{
+					nut.pageContext.addAndShowPage(nextPage,{
 						transition: nextTransition,
 						transitionDirection: nextDirection,
 						transitionDuration: 1000,
@@ -111,10 +106,10 @@
 			});
 
 			$(document).ready(function () {
-				Eip.pageContext = new PhonePageContext({el: $('#bodyInner').get(0)});
-				var rp = Eip.pageContext.createPage('ColorDemoPageView',{color:'red'});
+				nut.pageContext = new nut.Contexts.PhonePageContext({el: $('#bodyInner').get(0)});
+				var rp = nut.pageContext.getPageInst('ColorDemoPageView',{color:'red'});
 				rp.init();
-				Eip.pageContext.addAndShowPage(rp);
+				nut.pageContext.addAndShowPage(rp);
 
 			});
 		</script>

@@ -1,13 +1,9 @@
 (function(){
-			Eip = {};
-			Eip.Pages = {};
-			Eip.Transitions = {};
+			nut = {};
+			nut.Pages = {};
+			nut.Contexts = {};
+			nut.Transitions = {};
 
-			Eip.views = {};
-			Eip.models = {};
-			Eip.collections = {};
-			Eip.utils = {};
-			Eip.templates = {};	
-			Eip.constants = {};
+			nut.utils = {};
+			nut.constants = {};
 })();
-

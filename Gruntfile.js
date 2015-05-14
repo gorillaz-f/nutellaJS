@@ -26,7 +26,7 @@ module.exports = function(grunt) {
         }
     },
     concat: {
-        dist: {
+        alljs: {
             src: [
                 'src/init.js',
                 'src/context.js',
@@ -34,8 +34,12 @@ module.exports = function(grunt) {
                 'src/transition.js',
                 'src/utils.js',
             ],
-            dest: 'dest/output.js'
-        }
+            dest: 'dest/nut-all.js'
+        },
+        allcss: {
+            src: ['src/core.css'],
+            dest: 'dest/nut-all.css',
+        },
     },
     uglify: {
         options: {
@@ -51,8 +55,8 @@ module.exports = function(grunt) {
         }
         */
         build: {
-            src:  'dest/output.js',
-            dest: 'dest/output.min.js'
+            src:  'dest/nut-all.js',
+            dest: 'dest/nut-all.min.js'
         }
     }
 
