@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<script src="../../lib/zepto.min.js"></script>
+	</head>
+
+	<body>
+		<div id="bodyInner"></div>
+		<div id="loading-prepage" class="loading-page">
+			<div class="loading-text">简历君正在赶路...</div>
+			<ul class="loader">
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+
+		<style>
+			.loading-page{
+			  background-color: #70E887;
+			  width: 100%;
+			  height:100%;
+			  display: block;
+			  top: 0;
+			  left: 0;
+			  position: absolute;
+			}
+
+			.loader{
+				position: fixed;
+				z-index: 3;
+				left: 0;
+				right: 0;
+				top: 50%;
+				width: 60px;
+				height: 60px;
+				margin: 0 auto;
+				margin-top: -30px;
+			    list-style: none;
+			}
+
+			@-webkit-keyframes 'loadbars' {
+				0%{
+					height: 10px;
+					margin-top: 40px;
+				}
+				100%{
+					height: 50px;
+					margin-top: 0px;
+				}
+			}
+
+			.loader > li{
+				background-color: #FFFFFF;
+				width: 10px;
+				height: 10px;
+				float: right;
+				margin-right: 5px;
+			    box-shadow: 0px 100px 20px rgba(0,0,0,0.2);
+			}
+			.loader > li:first-child{
+				-webkit-animation: loadbars 0.6s ease-in infinite 0s;
+			    -webkit-animation-direction: alternate;
+			}
+			.loader > li:nth-child(2){
+				-webkit-animation: loadbars 0.6s ease-in infinite -0.2s;
+			    -webkit-animation-direction: alternate;
+			}
+			.loader > li:nth-child(3){
+				-webkit-animation: loadbars 0.6s ease-in infinite -0.4s;
+			    -webkit-animation-direction: alternate;
+			}
+
+			.arrow-down {
+				width: 0;
+				height: 0;
+				border-left: 20px solid transparent;
+				border-right: 20px solid transparent;
+				border-top: 20px solid #FFFFFF;
+
+				position: fixed;
+				z-index: 3;
+				margin: 0 auto;
+				left: 0;
+				right: 0;
+				bottom: 0;
+
+				-webkit-animation: forward 0.6s ease-in-out infinite -0.2s;
+			    -webkit-animation-direction: alternate;
+			}
+
+			@-webkit-keyframes 'forward' {
+				0%{
+					bottom: 0;
+				}
+				100%{
+					bottom: 10px;
+				}
+			}
+
+			.loading-text {
+			    position: fixed;
+			    top: 35%;
+			    left: 0;
+			    right: 0;
+			    z-index: 3;
+			    margin: 0 auto;
+
+			    text-align: center;
+			    color: #fff;
+			    font-size: 20px;
+			}
+		</style>
+
+        <script src="../../lib/underscore-min.js"></script>
+		<script src="../../lib/backbone-min.js"></script>
+		<script src="../../lib/iscroll.js"></script>
+		<script src="../../lib/gestureUtil.js"></script>
+		<script src="../../lib/require.js"></script>
+		<!--  -->
+		<script src="../../dest/nut-all.js" charset="utf-8"></script>
+		<link  href="../../dest/nut-all.css" rel="stylesheet" media="screen">
+		<script src="loadingPage.js" charset="utf-8"></script>
+		<link  href="loadingPage.css" rel="stylesheet" media="screen">
+		<script src="timelinePage.js" charset="utf-8"></script>
+		<link  href="timelinePage.css" rel="stylesheet" media="screen">
+
+		<script>
+			var loadStart = Date.now();
+			$(document).ready(function () {
+				var loadEnd = Date.now();
+				var duration = Number(loadEnd) - Number(loadStart);
+				var delay = duration<4000 ? 4000-duration : 1;
+				console.log(loadEnd,'-',loadStart,'=',duration,'and delay',delay);
+
+				setTimeout(function(){
+					nut.pageContext = new nut.Contexts.PhonePageContext({el: $('#bodyInner').get(0)});
+					var p = nut.pageContext.getPageInst('LoadingPageView');
+					p.init();
+					nut.pageContext.addAndShowPage(p);
+
+					$('#loading-prepage').remove();
+
+				}, delay);
+
+			});
+		</script>
+	</body>
+</html>
