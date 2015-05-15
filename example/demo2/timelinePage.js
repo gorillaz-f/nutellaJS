@@ -1,13 +1,11 @@
 nut.Pages.TimelinePageView = nut.Pages.PageView.extend({
-    events: {
-        'tap .arrow-down': 'doNext'
-    },
+
     workinfo: [
         {
             id:     'work1',
             date:   '1984',
-            label:  '那年，我出生了',
-            content:'30年前，我出生在一个平凡家庭里',
+            label:  '我出生了',
+            content:'30年前，我出生在一个平凡家庭。',
         },{
             id:     'work2',
             date:   '2003',
@@ -22,7 +20,7 @@ nut.Pages.TimelinePageView = nut.Pages.PageView.extend({
             id:     'work4',
             date:   '2009',
             label:  '广州誉博医疗信息科技公司',
-            content:'在这家创业型小公司，我在灰常牛的CEO和CTO带领下，领略到什么叫互联网思维，什么叫工程师文化。可惜项目最终没有成功。（2009~2011）',
+            content:'这家创业型小公司，主要建立并维护drsays网站，竞争对手是著名的zocdoc。在灰常牛的CEO和CTO带领下，我领略到什么叫互联网思维，什么叫工程师文化。可惜项目最终没有成功。（2009~2011）',
         },{
             id:     'work5',
             date:   '2011',
@@ -30,6 +28,11 @@ nut.Pages.TimelinePageView = nut.Pages.PageView.extend({
             content:'我幸运地遇上一位开明的领导，在他的授权下，我将之前学习到的新鲜思维和技术，对陈旧的企业应用进行了一番改造，成绩斐然。及后，我组建了产品团队，管理研发公司的拳头产品。（2011~2015）',
         }
     ],
+
+    events: {
+        'tap .arrow-down': 'doNext'
+    },
+
     init: function(){
         var self = this;
         var timeline = $('<ul id="timeline"></ul>');

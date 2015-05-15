@@ -110,7 +110,7 @@
 
 			    text-align: center;
 			    color: #fff;
-			    font-size: 20px;
+			    font-size: 22px;
 			}
 		</style>
 
@@ -133,13 +133,16 @@
 			var loadStart = Date.now();
 			$(document).ready(function () {
 				var loadEnd = Date.now();
-				var duration = Number(loadEnd) - Number(loadStart);
-				var delay = duration<4000 ? 4000-duration : 1;
-				console.log(loadEnd,'-',loadStart,'=',duration,'and delay',delay);
+				var cost = Number(loadEnd) - Number(loadStart);
+				var delay = cost<4000 ? 4000-cost : 1;
+				console.log(loadEnd,'-',loadStart,'=',cost,'and delay',delay);
 
 				setTimeout(function(){
 					nut.pageContext = new nut.Contexts.PhonePageContext({el: $('#bodyInner').get(0)});
-					var p = nut.pageContext.getPageInst('LoadingPageView');
+					var p = nut.pageContext.getPageInst('LoadingPageView', {
+						cost : cost,
+						delay: delay,
+					});
 					p.init();
 					nut.pageContext.addAndShowPage(p);
 

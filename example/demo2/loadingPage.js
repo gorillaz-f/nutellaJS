@@ -3,9 +3,16 @@ nut.Pages.LoadingPageView = nut.Pages.PageView.extend({
         'tap .arrow-down': 'doNext'
     },
     init: function(){
-        this.$el.append('<div class="loading-text">感谢你关注我  往下看看吧</div>');
-		this.$el.append('<div class="arrow-down"></div>');
         this.$el.addClass('loading-page');
+        var text = $('<div class="loading-text"></div>');
+        text.append('<span>感谢你关注我，请往下看吧</span>');
+        text.append('<p>这次启动加载，合计耗时：'+this.options.cost+'ms</p>');
+        if (Number(this.options.delay)>100) {
+            text.append('<p>但加载的动画做得这么好看</p>');
+            text.append('<p>我就让你多看了一会：'+this.options.delay+'ms</p>');
+        }
+        this.$el.append(text);
+		this.$el.append('<div class="arrow-down"></div>');
     },
     doNext: function(){
         var nextPage  = nut.pageContext.getPageInst('TimelinePageView');

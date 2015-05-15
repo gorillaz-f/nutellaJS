@@ -14,9 +14,16 @@ nut.Pages.SkillPageView = nut.Pages.PageView.extend({
             level: 2,
         },{
             name: '技术团队管理',
-            level: 2,
+            level: 4,
+        },{
+            name: '产品设计',
+            level: 4,
         }
     ],
+
+    events: {
+        'tap .arrow-down': 'doNext'
+    },
 
     init: function(){
         var self = this;
@@ -30,6 +37,7 @@ nut.Pages.SkillPageView = nut.Pages.PageView.extend({
         }
         //});
         self.$el.append(wrapper);
+        self.$el.append('<div class="arrow-down"></div>');
     },
 
     renderChargingBar: function(index, skill){
@@ -47,5 +55,15 @@ nut.Pages.SkillPageView = nut.Pages.PageView.extend({
         setTimeout(function(){
             //self.$('.battery').css('-webkit-animation-play-state','paused');
         },4000);
+    },
+
+    doNext: function(){
+        var nextPage  = nut.pageContext.getPageInst('FrameworksPageView');
+        nextPage.init();
+        nut.pageContext.addAndShowPage(nextPage,{
+            transition: 'Cover',
+            transitionDirection: 'up',
+            transitionDuration: 1500,
+        });
     },
 });
