@@ -1,6 +1,6 @@
 nut.Pages.TimelinePageView = nut.Pages.PageView.extend({
     events: {
-        //'tap .arrow-down': 'doNext'
+        'tap .arrow-down': 'doNext'
     },
     workinfo: [
         {
@@ -38,7 +38,8 @@ nut.Pages.TimelinePageView = nut.Pages.PageView.extend({
             var work = self.renderWork(info);
             timeline.append(work);
         });
-        self.$el.addClass('timelineContainer');
+        self.$el.addClass('timeline-page');
+        self.$el.append('<div class="arrow-down"></div>');
     },
 
     renderWork: function(workInfo) {
@@ -73,6 +74,7 @@ nut.Pages.TimelinePageView = nut.Pages.PageView.extend({
             if (index>self.workinfo.length) {
                 console.log('timer cleared');
                 window.clearInterval(timer);
+                //self.$el.append('<div class="arrow-down"></div>');
                 return;
             }
             self.$('input').attr('checked',null);
@@ -90,6 +92,5 @@ nut.Pages.TimelinePageView = nut.Pages.PageView.extend({
             transitionDirection: 'up',
             transitionDuration: 1500,
         });
-
     },
 });

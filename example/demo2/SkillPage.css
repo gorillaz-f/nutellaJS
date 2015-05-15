@@ -1,0 +1,169 @@
+.skill-page {
+    /*
+    background: #B2DFDB;
+    */
+    background: #3f4348;
+}
+
+
+#wrapper {
+    margin: 30px auto;
+    width:  80%;
+}
+
+/*
+ * battery 是电池芯
+ * before:battery 是电池外壳
+ * charging 动画的尺寸，就是电池芯的最后尺寸
+ * 所以：
+ * 电池芯的宽度应该比电池外壳小12px
+ * 动画的高度应该比电池壳的高度小12px
+ */
+.battery {
+	position: absolute;
+    bottom: 80%;
+	display: block;
+	margin:0px;
+	background: #ffffff;
+	width: 53px;
+	height: 10px;
+	float: left;
+}
+
+.battery:before {
+	content: "";
+	display: block;
+	background: transparent;
+	border: 6px solid #ffffff;
+	margin: -12px;
+	width: 65px;
+	height: 100px;
+	position: absolute;
+    bottom:0;
+	border-radius: 2px;
+	-moz-box-shadow: 0 0 5px 5px #888;
+	-webkit-box-shadow: 0 0 5px 5px#888;
+	box-shadow: -2px 0 5px 2px #222;
+	z-index:2000;
+}
+
+.battery:after {
+    content: attr(skill-name);
+	position: absolute;
+    bottom: -40px;
+    left: -24px;
+    color: #fff;
+    text-align: center;
+    width: 100px;
+}
+
+@-webkit-keyframes charging1 {
+    /*
+    from { height: 10px;  background: #f00; }
+    to   { height: 22px;  background: rgb(239, 16, 0); }
+    */
+    from { height: 10px;  background: #FFEA00; }
+    to   { height: 22px;  background: rgb(239, 235, 0); }
+}
+@-webkit-keyframes charging2 {
+    /*
+    from { height: 10px;  background: #f00; }
+    to   { height: 33px;  background: rgb(199, 56, 0); }
+    */
+    from { height: 10px;  background: #FFEA00; }
+    to   { height: 33px;  background: rgb(199, 239, 0); }
+}
+@-webkit-keyframes charging3 {
+    /*
+    from { height: 10px;  background: #f00; }
+    to   { height: 44px;  background: rgb(145, 110, 0); }
+    */
+    from { height: 10px;  background: #FFEA00; }
+    to   { height: 44px;  background: rgb(145, 243, 0); }
+}
+@-webkit-keyframes charging4 {
+    /*
+    from { height: 10px;  background: #f00; }
+    to   { height: 66px;  background: rgb(77, 178, 0); }
+    */
+    from { height: 10px;  background: #FFEA00; }
+    to   { height: 66px;  background: rgb(77, 249, 0); }
+}
+@-webkit-keyframes charging5 {
+    /*
+    from { height: 10px;  background: #f00; }
+    to   { height: 88px;  background: #0f0; }
+    */
+    from { height: 10px;  background: #FFEA00; }
+    to   { height: 88px;  background: #0f0; }
+}
+
+.charging {
+	-webkit-animation: charging 5s linear 1;
+    -webkit-animation-fill-mode: forwards;
+}
+.charging.level1 {
+	-webkit-animation-name: charging1;
+    -webkit-animation-duration: 1s;
+}
+.charging.level2 {
+	-webkit-animation-name: charging2;
+    -webkit-animation-duration: 2s;
+}
+.charging.level3 {
+	-webkit-animation-name: charging3;
+    -webkit-animation-duration: 3s;
+}
+.charging.level4 {
+	-webkit-animation-name: charging4;
+    -webkit-animation-duration: 4s;
+}
+.charging.level5 {
+	-webkit-animation-name: charging5;
+    -webkit-animation-duration: 5s;
+}
+
+.no1 {
+    left: 22%;
+    bottom: 75%;
+}
+.no2 {
+    right: 22%;
+    bottom: 75%;
+}
+.no3 {
+    left: 22%;
+    bottom: 45%;
+}
+.no4 {
+    right: 22%;
+    bottom: 45%;
+}
+.no5 {
+    left: 22%;
+    bottom: 15%;
+}
+.no6 {
+    right: 22%;
+    bottom: 15%;
+}
+
+.charging_txt {
+	font-family: arial, helvetica, sans-serif;
+	font-weight:bold;
+	font-style:italic;
+	text-align:center;
+	clear:both;
+	color:#fff;
+	text-shadow:0 2px #000;
+}
+
+@-webkit-keyframes glow {
+    from { opacity:0; }
+    to { opacity:1; }
+}
+
+.glow {
+	-webkit-animation: glow 3s ease-in-out infinite;
+	-webkit-animation-direction: alternate;
+}
