@@ -49,16 +49,13 @@ nut.Pages.SkillPageView = nut.Pages.PageView.extend({
     },
 
     onTransitionEnd: function(){
-        var self = this;
-
         this.$('.battery').addClass('charging');
-        setTimeout(function(){
-            //self.$('.battery').css('-webkit-animation-play-state','paused');
-        },4000);
     },
 
     doNext: function(){
-        var nextPage  = nut.pageContext.getPageInst('FrameworksPageView');
+        // 确保动画不会被再次触发
+        this.$('.battery').addClass('charged').removeClass('charging');
+        var nextPage  = nut.pageContext.getPageInst('FrameworkPageView');
         nextPage.init();
         nut.pageContext.addAndShowPage(nextPage,{
             transition: 'Cover',

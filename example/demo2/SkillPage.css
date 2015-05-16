@@ -123,6 +123,27 @@
     -webkit-animation-duration: 5s;
 }
 
+.charged.level1 {
+    height: 22px;
+    background: rgb(239, 235, 0);
+}
+.charged.level2 {
+    height: 33px;
+    background: rgb(199, 239, 0);
+}
+.charged.level3 {
+    height: 44px;
+    background: rgb(145, 243, 0);
+}
+.charged.level4 {
+    height: 66px;
+    background: rgb(77, 249, 0);
+}
+.charged.level5 {
+    height: 88px;
+    background: #0f0;
+}
+
 .no1 {
     left: 22%;
     bottom: 75%;
@@ -156,14 +177,4 @@
 	clear:both;
 	color:#fff;
 	text-shadow:0 2px #000;
-}
-
-@-webkit-keyframes glow {
-    from { opacity:0; }
-    to { opacity:1; }
-}
-
-.glow {
-	-webkit-animation: glow 3s ease-in-out infinite;
-	-webkit-animation-direction: alternate;
 }
