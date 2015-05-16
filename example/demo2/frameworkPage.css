@@ -1,31 +1,9 @@
-@font-face {
-  font-family: 'Electrolize';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Electrolize'), local('Electrolize-Regular'), url(http://themes.googleusercontent.com/static/fonts/electrolize/v2/DDy9sgU2U7S4xAwH5thnJ4bN6UDyHWBl620a-IRfuBk.woff) format('woff');
-}
 
 .framework-page {
   background: #310404 url(http://web-sonick.zz.mu/images/sl/red_texture.jpg) repeat top left;
   font-family: 'Electrolize';
 }
 
-.container {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
-a {
-  text-decoration: none;
-}
-
-h1.main,
-p.demos {
-  -webkit-animation-delay: 18s;
-  -moz-animation-delay: 18s;
-  -ms-animation-delay: 18s;
-  animation-delay: 18s;
 }
 
 .sp-container {
