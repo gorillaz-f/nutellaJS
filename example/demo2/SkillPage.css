@@ -41,9 +41,9 @@
 	position: absolute;
     bottom:0;
 	border-radius: 2px;
+	box-shadow: -2px 0 5px 2px #222;
 	-moz-box-shadow: 0 0 5px 5px #888;
 	-webkit-box-shadow: 0 0 5px 5px#888;
-	box-shadow: -2px 0 5px 2px #222;
 	z-index:2000;
 }
 
@@ -58,42 +58,22 @@
 }
 
 @-webkit-keyframes charging1 {
-    /*
-    from { height: 10px;  background: #f00; }
-    to   { height: 22px;  background: rgb(239, 16, 0); }
-    */
     from { height: 10px;  background: #FFEA00; }
     to   { height: 22px;  background: rgb(239, 235, 0); }
 }
 @-webkit-keyframes charging2 {
-    /*
-    from { height: 10px;  background: #f00; }
-    to   { height: 33px;  background: rgb(199, 56, 0); }
-    */
     from { height: 10px;  background: #FFEA00; }
     to   { height: 33px;  background: rgb(199, 239, 0); }
 }
 @-webkit-keyframes charging3 {
-    /*
-    from { height: 10px;  background: #f00; }
-    to   { height: 44px;  background: rgb(145, 110, 0); }
-    */
     from { height: 10px;  background: #FFEA00; }
     to   { height: 44px;  background: rgb(145, 243, 0); }
 }
 @-webkit-keyframes charging4 {
-    /*
-    from { height: 10px;  background: #f00; }
-    to   { height: 66px;  background: rgb(77, 178, 0); }
-    */
     from { height: 10px;  background: #FFEA00; }
     to   { height: 66px;  background: rgb(77, 249, 0); }
 }
 @-webkit-keyframes charging5 {
-    /*
-    from { height: 10px;  background: #f00; }
-    to   { height: 88px;  background: #0f0; }
-    */
     from { height: 10px;  background: #FFEA00; }
     to   { height: 88px;  background: #0f0; }
 }
