@@ -4,8 +4,6 @@
   font-family: 'Electrolize';
 }
 
-}
-
 .sp-container {
   position: fixed;
   top: 0px;
@@ -123,39 +121,33 @@
     display: block;
 }
 
-.sp-globe {
-  position: absolute;
-  width: 282px;
-  height: 273px;
-  left: 50%;
-  top: 50%;
-  margin: -137px 0 0 -141px;
-  background: transparent url(http://web-sonick.zz.mu/images/sl/globe.png) no-repeat top left;
-  -webkit-animation: fadeInBack 3.6s linear 14s backwards;
-  -moz-animation: fadeInBack 3.6s linear 14s backwards;
-  -ms-animation: fadeInBack 3.6s linear 14s backwards;
-  animation: fadeInBack 3.6s linear 14s backwards;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
-  filter: alpha(opacity=30);
-  opacity: 0.3;
-  -webkit-transform: scale(5);
-  -moz-transform: scale(5);
-  -o-transform: scale(5);
-  -ms-transform: scale(5);
-  transform: scale(5);
-}
-
-
 .sp-container .sp-circle-link {
-  -webkit-animation: fadeInRotate 1s linear 18s backwards;
-  -moz-animation: fadeInRotate 1s linear 18s backwards;
-  -ms-animation: fadeInRotate 1s linear 18s backwards;
-  animation: fadeInRotate 1s linear 18s backwards;
-  -webkit-transform: scale(1) rotate(0deg);
-  -moz-transform: scale(1) rotate(0deg);
-  -o-transform: scale(1) rotate(0deg);
-  -ms-transform: scale(1) rotate(0deg);
-  transform: scale(1) rotate(0deg);
+
+    position: absolute;
+    left: 50%;
+    bottom: 100px;
+    margin-left: -50px;
+    text-align: center;
+    line-height: 100px;
+    width: 100px;
+    height: 100px;
+    background: #fff;
+    color: #3f1616;
+    font-size: 25px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    text-decoration:none;
+
+    -webkit-animation: fadeInRotate 1s linear 18s backwards;
+    -moz-animation: fadeInRotate 1s linear 18s backwards;
+    -ms-animation: fadeInRotate 1s linear 18s backwards;
+    animation: fadeInRotate 1s linear 18s backwards;
+    -webkit-transform: scale(1) rotate(0deg);
+    -moz-transform: scale(1) rotate(0deg);
+    -o-transform: scale(1) rotate(0deg);
+    -ms-transform: scale(1) rotate(0deg);
+    transform: scale(1) rotate(0deg);
 }
 .sp-circle-link:hover {
   background: #85373b;

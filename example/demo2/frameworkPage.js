@@ -46,7 +46,7 @@ nut.Pages.FrameworkPageView = nut.Pages.PageView.extend({
                         <span>for cooperation</span>\
                         <span>and management</span>\
                     </h2>\
-                    <a class="sp-circle-link" href="#">Repeat!</a>\
+                    <a class="sp-circle-link" href="#">Repeat</a>\
                 </div>\
             </div>\
         </div>\
