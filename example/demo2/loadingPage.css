@@ -108,3 +108,7 @@
 .loading-text > p:first-child {
     margin-top: 20px;
 }
+
+.memo-text {
+    color: #eee;
+}
