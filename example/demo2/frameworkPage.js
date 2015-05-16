@@ -52,6 +52,8 @@ nut.Pages.FrameworkPageView = nut.Pages.PageView.extend({
         </div>\
         ');
 
+		this.$el.append('<div class="arrow-down"></div>');
+
         var self = this;
         setTimeout(function(){
             //self.$('.sp-container h2').css('-webkit-animation-play-state','paused');
@@ -69,6 +71,12 @@ nut.Pages.FrameworkPageView = nut.Pages.PageView.extend({
     },
 
     doNext: function(){
-
+        var nextPage  = nut.pageContext.getPageInst('PersonalPageView');
+        nextPage.init();
+        nut.pageContext.addAndShowPage(nextPage,{
+            transition: 'Cover',
+            transitionDirection: 'up',
+            transitionDuration: 1500,
+        });
     },
 });
