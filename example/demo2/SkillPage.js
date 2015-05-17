@@ -14,10 +14,10 @@ nut.Pages.SkillPageView = nut.Pages.PageView.extend({
             level: 2,
         },{
             name: '技术团队管理',
-            level: 4,
+            level: 3,
         },{
             name: '产品设计',
-            level: 4,
+            level: 3,
         }
     ],
 

@@ -84,23 +84,23 @@
 }
 .charging.level1 {
 	-webkit-animation-name: charging1;
-    -webkit-animation-duration: 1s;
+    -webkit-animation-duration: 0.5s;
 }
 .charging.level2 {
 	-webkit-animation-name: charging2;
-    -webkit-animation-duration: 2s;
+    -webkit-animation-duration: 1s;
 }
 .charging.level3 {
 	-webkit-animation-name: charging3;
-    -webkit-animation-duration: 3s;
+    -webkit-animation-duration: 1.5s;
 }
 .charging.level4 {
 	-webkit-animation-name: charging4;
-    -webkit-animation-duration: 4s;
+    -webkit-animation-duration: 2s;
 }
 .charging.level5 {
 	-webkit-animation-name: charging5;
-    -webkit-animation-duration: 5s;
+    -webkit-animation-duration: 2.5s;
 }
 
 .charged.level1 {
