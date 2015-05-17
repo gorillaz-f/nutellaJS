@@ -1,5 +1,6 @@
 .personal-page {
     background-image: url(img/me.png);
+    background-color: #eee;
     background-size: auto 700px;
     background-position: center top;
 }
