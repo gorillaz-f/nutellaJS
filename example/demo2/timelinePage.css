@@ -3,6 +3,7 @@
  * $vertical variable to false
  * ------------------------------------- */
 
+
 /* -------------------------------------
  * timeline
  * ------------------------------------- */
@@ -31,7 +32,7 @@
 }
 
 .date {
-  margin-top: -8px;
+  margin-top: -10px;
   top: 50%;
   left: -62px;
   font-size: 0.95em;
@@ -97,9 +98,9 @@ label {
   position: absolute;
   z-index: 100;
   cursor: pointer;
-  top: 20px;
-  padding: 4px 10px 0;
+  top: 23px;
   transition: transform 0.2s linear;
+  -webkit-transition: transform 0.2s linear;
 }
 
 .radio {
@@ -107,9 +108,10 @@ label {
 }
 
 .radio:checked + .relative label {
+  top:20px;
   cursor: auto;
   transform: translateX(42px);
-  padding: 0;
+  -webkit-transform: translateX(42px);
 }
 .radio:checked + .relative .circle {
   background: #f98262;
@@ -119,67 +121,13 @@ label {
   border-color: #eee9dc;
   margin-right: 20px;
   transform: translateX(20px);
+  -webkit-transform: translateX(20px);
   transition: max-height 0.4s linear, border-color 0.5s linear, transform 0.2s linear;
+  -webkit-transition: max-height 0.4s linear, border-color 0.5s linear, transform 0.2s linear;
 }
 .radio:checked ~ .content p {
   max-height: 200px;
   color: #eee9dc;
   transition: color 0.3s linear 0.3s;
+  -webkit-transition: color 0.3s linear 0.3s;
 }
-
-/* -------------------------------------
- * mobile phones (vertical version only)
- * ------------------------------------- */
- /*
-@media screen and (max-width: 767px) {
-  #timeline {
-    margin-left: 0;
-    padding-left: 0;
-    border-left: none;
-  }
-  #timeline li {
-    margin: 50px 0;
-  }
-
-  label {
-    width: 85%;
-    font-size: 1.1em;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: block;
-    transform: translateX(18px);
-  }
-
-  .content {
-    padding-top: 45px;
-    border-color: #eee9dc;
-  }
-  .content:before, .content:after {
-    border: solid transparent;
-    bottom: 100%;
-  }
-  .content:before {
-    border-bottom-color: inherit;
-    border-width: 17px;
-    top: -16px;
-    left: 50px;
-    margin-left: -17px;
-  }
-  .content:after {
-    border-bottom-color: #48b379;
-    border-width: 20px;
-    top: -20px;
-    left: 50px;
-    margin-left: -20px;
-  }
-  .content p {
-    font-size: 0.9em;
-    line-height: 1.4;
-  }
-
-  .circle, .date {
-    display: none;
-  }
-}
-*/
