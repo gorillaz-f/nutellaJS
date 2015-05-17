@@ -35,14 +35,17 @@ nut.Pages.TimelinePageView = nut.Pages.PageView.extend({
 
     init: function(){
         var self = this;
-        var timeline = $('<ul id="timeline"></ul>');
-        self.$el.append(timeline);
+        //var timeline = $('<div id="timeline-wrapper"><ul id="timeline"></ul></div>');
+        self.$el.append('<div id="timeline-wrapper"><ul id="timeline"></ul></div>');
+        var timeline = self.$('#timeline');
         $(self.workinfo).each(function(index, info){
             var work = self.renderWork(info);
             timeline.append(work);
         });
         self.$el.addClass('timeline-page');
         self.$el.append('<div class="arrow-down"></div>');
+
+
     },
 
     renderWork: function(workInfo) {
@@ -68,6 +71,20 @@ nut.Pages.TimelinePageView = nut.Pages.PageView.extend({
     // 在入场动画完成后的回调钩子
     onTransitionEnd: function(){
         var self =  this;
+
+        self.iscroll = new iScroll(
+			'timeline-wrapper',
+			{
+				hScroll: false,
+				vScroll: true,
+				hideScrollbar: true,
+				fadeScrollbar: true,
+			}
+		);
+        self.$('#timeline').on('animationend',function(){
+            console.log('animate ends')
+        });
+
         var index = 1;
         self.$('input').attr('checked',null);
         self.$('#work'+index).attr('checked',true);
@@ -77,11 +94,13 @@ nut.Pages.TimelinePageView = nut.Pages.PageView.extend({
             if (index>self.workinfo.length) {
                 console.log('timer cleared');
                 window.clearInterval(timer);
+                self.iscroll.refresh();
                 //self.$el.append('<div class="arrow-down"></div>');
                 return;
             }
             self.$('input').attr('checked',null);
             self.$('#work'+index).attr('checked',true);
+            self.iscroll.refresh();
             index++;
         },5000);
 
