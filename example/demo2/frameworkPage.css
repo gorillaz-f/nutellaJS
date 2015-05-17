@@ -51,16 +51,16 @@
 
 .sp-container h2.frame-2 {
   -webkit-animation-delay: 6s;
-  -webkit-animation-duration: 2s;
+  -webkit-animation-duration: 3s;
 }
 
 .sp-container h2.frame-3 {
-  -webkit-animation-delay: 8s;
+  -webkit-animation-delay: 9s;
   -webkit-animation-duration: 4s;
 }
 
 .sp-container h2.frame-4 {
-  -webkit-animation-delay: 12s;
+  -webkit-animation-delay: 13s;
   -webkit-animation-duration: 3s;
 }
 
@@ -81,30 +81,31 @@
 .sp-container h2.four-lines {
   height: 200px;
   margin-top: -100px;
-  font-size: 36px;
 }
 .sp-container h2.six-lines {
   height: 300px;
   margin-top: -150px;
-  font-size: 34px;
 }
 
+.sp-container h2.long-text {
+  font-size: 32px;
+}
 .sp-container h2 span {
   display: block;
 }
 
 .sp-container h2.frame-5 span {
-  -webkit-animation: blurFadeIn 3s ease-in 15s backwards;
+  -webkit-animation: blurFadeIn 3s ease-in 16s backwards;
   color: transparent;
   text-shadow: 0px 0px 1px #fff;
 }
 
 .sp-container h2.frame-5 span:nth-child(2) {
-  -webkit-animation-delay: 16s;
+  -webkit-animation-delay: 17s;
 }
 
 .sp-container h2.frame-5 span:nth-child(3) {
-  -webkit-animation-delay: 17s;
+  -webkit-animation-delay: 18s;
 }
 
 
@@ -139,10 +140,10 @@
     border-radius: 50%;
     text-decoration:none;
 
-    -webkit-animation: fadeInRotate 1s linear 18s backwards;
-    -moz-animation: fadeInRotate 1s linear 18s backwards;
-    -ms-animation: fadeInRotate 1s linear 18s backwards;
-    animation: fadeInRotate 1s linear 18s backwards;
+    -webkit-animation: fadeInRotate 1s linear 20s backwards;
+    -moz-animation: fadeInRotate 1s linear 20s backwards;
+    -ms-animation: fadeInRotate 1s linear 20s backwards;
+    animation: fadeInRotate 1s linear 20s backwards;
     -webkit-transform: scale(1) rotate(0deg);
     -moz-transform: scale(1) rotate(0deg);
     -o-transform: scale(1) rotate(0deg);

@@ -22,26 +22,27 @@ nut.Pages.FrameworkPageView = nut.Pages.PageView.extend({
                         <span>BackboneJS</span>\
                         <span>JQuery/Zepto</span>\
                         <span>iScroll4</span>\
-                        <span>requireJS</span>\
-                        <span>ionic</span>\
-                        <span>bootstrap</span>\
+                        <span>RequireJS</span>\
+                        <span>Ionic</span>\
+                        <span>Bootstrap</span>\
                     </h2>\
-                    <h2 class="frame-2 two-lines" title="跨平台">\
+                    <h2 class="frame-2 two-lines long-text" title="跨平台">\
                         <span>Phonegap/Cordova</span>\
                         <span>React Native</span>\
                     </h2>\
-                    <h2 class="frame-3 four-lines" title="服务器端">\
+                    <h2 class="frame-3 six-lines" title="服务器端">\
                         <span>CasperJS</span>\
-                        <span>multi-thread</span>\
-                        <span>memcached</span>\
-                        <span>mongoDB</span>\
+                        <span>Multi-thread</span>\
+                        <span>Memcached</span>\
+                        <span>MongoDB</span>\
+                        <span>Httpd/tomcat</span>\
                     </h2>\
-                    <h2 class="frame-4 three-lines" title="系统架构">\
-                        <span>Distributed Architecture</span>\
-                        <span>Reverse Proxy</span>\
-                        <span>Master-Slave</span>\
+                    <h2 class="frame-4 three-lines long-text" title="工具">\
+                        <span>Vim/Atom/Sublime</span>\
+                        <span>Grunt/Ant/Gradle</span>\
+                        <span>Awk/Sed/Grep...</span>\
                     </h2>\
-                    <h2 class="frame-5 three-lines" >\
+                    <h2 class="frame-5 three-lines long-text" >\
                         <span title="管理">we use Teambition</span>\
                         <span>for cooperation</span>\
                         <span>and management</span>\
@@ -64,9 +65,11 @@ nut.Pages.FrameworkPageView = nut.Pages.PageView.extend({
     doRepeat: function(){
         //this.$el.find('.sp-container h2').css('-webkit-animation-play-state','running');
         var container = this.$('.sp-container');
+        container.hide();
         container.removeClass('sp-container');
         setTimeout(function(){
             container.addClass('sp-container');
+            container.show();
         },500);
     },
 
